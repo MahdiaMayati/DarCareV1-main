@@ -47,7 +47,7 @@
   ],
   "item": [
     {
-      "name": "Auth",
+      "name": "Auth test for git",
       "description": "app/Modules/Auth/routes/api.php",
       "item": [
         {
