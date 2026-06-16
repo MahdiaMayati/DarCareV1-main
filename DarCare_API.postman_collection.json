@@ -843,7 +843,7 @@
               { "key": "Accept", "value": "application/json" }
             ],
             "url": "{{base_url}}/api/admin/dashboard/stats",
-            "description": "GET admin/dashboar/stats at /api/admin/... (not /api/v1/admin/...)"
+            "description": "GET admin/dashboa/stats at /api/admin/... (not /api/v1/admin/...)"
           }
         }
       ]
