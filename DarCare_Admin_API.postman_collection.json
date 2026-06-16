@@ -1,0 +1,276 @@
+{
+  "info": {
+    "_postman_id": "darcare-admin-api-collection",
+    "name": "DarCare Admin API",
+    "description": "Admin-only routes from module api.php files and routes/api.php.\n\n- Most admin endpoints: `{{base_url}}/api/v1/admin/...`\n- Dashboard module only: `{{base_url}}/api/admin/...` (loaded via DashboardServiceProvider, no v1 prefix)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000"
+    },
+    {
+      "key": "id",
+      "value": "1"
+    },
+    {
+      "key": "providerId",
+      "value": "1"
+    },
+    {
+      "key": "requestId",
+      "value": "1"
+    },
+    {
+      "key": "categoryId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Dashboard",
+      "description": "app/Modules/Dashboard/routes/api.php",
+      "item": [
+        {
+          "name": "Get Summary Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": "{{base_url}}/api/admin/dashboard/stats",
+            "description": "GET admin/dashboard/stats — path is /api/admin/... (no v1)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "description": "app/Modules/Users/routes/api.php",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/admin/users?search=",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "admin", "users"],
+              "query": [
+                { "key": "search", "value": "", "description": "Optional name/phone/email search" }
+              ]
+            },
+            "description": "GET admin/users"
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": "{{base_url}}/api/v1/admin/users/{{id}}",
+            "description": "DELETE admin/users/{id} — soft delete"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Providers",
+      "description": "app/Modules/Providers/routes/api.php",
+      "item": [
+        {
+          "name": "List Providers",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/admin/providers?status=",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "admin", "providers"],
+              "query": [
+                { "key": "status", "value": "", "description": "available | busy | suspended" }
+              ]
+            },
+            "description": "GET admin/providers"
+          }
+        },
+        {
+          "name": "Update Provider Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"suspended\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/api/v1/admin/providers/{{providerId}}/status",
+            "description": "PATCH admin/providers/{id}/status — status: available, busy, suspended"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Service Requests",
+      "description": "app/Modules/ServiceRequests/routes/api.php",
+      "item": [
+        {
+          "name": "List Service Requests",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/admin/service-requests?status=&urgency=",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "admin", "service-requests"],
+              "query": [
+                { "key": "status", "value": "" },
+                { "key": "urgency", "value": "" }
+              ]
+            },
+            "description": "GET admin/service-requests"
+          }
+        },
+        {
+          "name": "Show Service Request",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": "{{base_url}}/api/v1/admin/service-requests/{{requestId}}",
+            "description": "GET admin/service-requests/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "description": "app/Modules/Categories/routes/api.php — apiResource except show",
+      "item": [
+        {
+          "name": "List Categories",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": "{{base_url}}/api/v1/admin/categories",
+            "description": "GET admin/categories"
+          }
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"صيانة تكييف وتبريد\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/api/v1/admin/categories",
+            "description": "POST admin/categories"
+          }
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Accept", "value": "application/json" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"السباكة والأعمال الصحية\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{base_url}}/api/v1/admin/categories/{{categoryId}}",
+            "description": "PUT admin/categories/{category}"
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": "{{base_url}}/api/v1/admin/categories/{{categoryId}}",
+            "description": "DELETE admin/categories/{category}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ratings",
+      "description": "app/Modules/Ratings/routes/api.php",
+      "item": [
+        {
+          "name": "List Ratings",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/admin/ratings?rating=&provider_id=",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "admin", "ratings"],
+              "query": [
+                { "key": "rating", "value": "", "description": "Filter by star rating (1-5)" },
+                { "key": "provider_id", "value": "", "description": "Filter by provider ID" }
+              ]
+            },
+            "description": "GET admin/ratings"
+          }
+        },
+        {
+          "name": "Delete Rating",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": "{{base_url}}/api/v1/admin/ratings/{{id}}",
+            "description": "DELETE admin/ratings/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Favorites",
+      "description": "app/Modules/Favorites/routes/api.php",
+      "item": [
+        {
+          "name": "Top Favorited Providers",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": "{{base_url}}/api/v1/admin/favorites/top-providers",
+            "description": "GET admin/favorites/top-providers"
+          }
+        }
+      ]
+    }
+  ]
+}
