@@ -53,4 +53,12 @@ class LocationService implements LocationServiceInterface
     {
         return $owner->addresses()->orderByDesc('is_primary')->get();
     }
+
+
+
+    public function getAllAddressesForAdmin()
+    {
+        // جلب العناوين مع الكائن المرتبط بها (الزبون أو الحرفي) مهما كان نوعه عبر الـ Morph
+        return Address::with('addressable')->latest()->paginate(15);
+    }
 }

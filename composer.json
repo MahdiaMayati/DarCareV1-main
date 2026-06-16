@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "google/apiclient": "*",
         "laravel/framework": "^12.0",
         "laravel/reverb": "^1.10",
         "laravel/sanctum": "^4.3",
@@ -78,7 +79,8 @@
     "extra": {
         "laravel": {
             "dont-discover": []
-        }
+        },
+        "google/apiclient-services": "[FirebaseCloudMessaging]"
     },
     "config": {
         "optimize-autoloader": true,
@@ -86,7 +88,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "google/apiclient-services": true
         },
         "process-timeout": 2000
     },

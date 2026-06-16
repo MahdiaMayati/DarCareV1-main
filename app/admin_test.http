@@ -87,3 +87,15 @@ Accept: application/json
 ### 12. جلب الحرفيين الأكثر شعبية وإضافة في المفضلة
 GET {{baseUrl}}/api/v1/admin/favorites/top-providers
 Accept: application/json
+
+
+### 16. إرسال إشعار فوري وجماعي عبر Firebase لجميع الأجهزة بالسيستم
+POST {{baseUrl}}/api/v1/admin/notifications/send-bulk
+Accept: application/json
+Content-Type: application/json
+
+{
+    "target": "all",
+    "title": "تنبيه طوارئ من إدارة دار كير 🚨",
+    "message": "مرحباً بكم في تطبيق Dar Care، تم تحديث نظام الخرائط لسرعة الوصول للحرفيين."
+}

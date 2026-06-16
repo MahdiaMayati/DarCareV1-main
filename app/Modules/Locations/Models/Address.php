@@ -26,6 +26,7 @@ class Address extends Model
         'is_primary' => 'boolean',
     ];
 
+    //   جلب الموديل الأب تلقائياً (سواء كان User أو Provider)
     public function addressable(): MorphTo
     {
         return $this->morphTo();

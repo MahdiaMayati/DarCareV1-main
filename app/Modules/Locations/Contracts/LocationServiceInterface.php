@@ -9,4 +9,6 @@ interface LocationServiceInterface
     public function setPrimaryAddress(object $owner, int $addressId): object;
     public function deleteAddress(object $owner, int $addressId): void;
     public function getAddresses(object $owner): \Illuminate\Database\Eloquent\Collection;
+
+    public function getAllAddressesForAdmin();
 }
