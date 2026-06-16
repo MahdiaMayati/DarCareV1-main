@@ -12,7 +12,10 @@ class SendMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'body' => ['required', 'string', 'max:5000'],
+            'body' => ['required', 'string', 'max:5000' ,
+            'service_request_id' => 'required|exists:service_requests,id',
+
+            ],
         ];
     }
 }

@@ -7,4 +7,5 @@ interface ChatServiceInterface
 {
     public function getMessages(int $requestId): mixed;
     public function sendMessage(int $requestId, object $sender, string $body): object;
+    
 }

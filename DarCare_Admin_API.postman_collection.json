@@ -249,6 +249,53 @@
           }
         }
       ]
+    },
+    {
+  "name": "Chat System",
+  "description": "روابط نظام المحادثات المباشرة بين العميل ومقدم الخدمة تتبع لموديول الـ Chat",
+  "item": [
+    {
+      "name": "Get Chat Messages",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/requests/{{requestId}}/messages",
+          "host": [ "{{base_url}}" ],
+          "path": [ "api", "requests", "{{requestId}}", "messages" ]
+        },
+        "description": "جلب جميع الرسائل المتبادلة لطلب خدمة معين مرتبة زمنياً من الأقدم للأحدث."
+      }
+    },
+    {
+      "name": "Send Message",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Accept", "value": "application/json" },
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"body\": \"مرحباً، أنا في الطريق إليك الآن لفحص العطل.\"\n}",
+          "options": {
+            "raw": { "language": "json" }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/requests/{{requestId}}/messages",
+          "host": [ "{{base_url}}" ],
+          "path": [ "api", "requests", "{{requestId}}", "messages" ]
+        },
+        "description": "إرسال رسالة جديدة داخل الشات. النظام يتعرف تلقائياً على نوع المرسل (عميل أو فني) من الـ Token ممرر الصلاحية."
+      }
     }
+  ]
+}
+
   ]
 }

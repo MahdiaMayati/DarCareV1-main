@@ -6,6 +6,7 @@ namespace App\Modules\Chat\Services;
 use App\Modules\Chat\Contracts\ChatServiceInterface;
 use App\Modules\Chat\Models\Message;
 use App\Modules\Notifications\Contracts\NotificationServiceInterface;
+use App\Modules\Chat\Events\MessageSent;
 
 class ChatService implements ChatServiceInterface
 {
